@@ -11,7 +11,7 @@ export async function deploy(
   try {
     await run("compile");
 
-    const params = await processParameters(hre, args);
+    const params = await getParams(hre, args);
 
     const [deployer] = await ethers.getSigners();
 
@@ -31,17 +31,10 @@ export async function deploy(
 
     console.log("Contract is deployed at", contractAddress);
 
-    if (!args.skip) {
-      console.log("Waiting for block confirmations...");
-
-      await contract.deploymentTransaction()?.wait(5);
-
-      console.log("Confirmed!");
-    }
-
     const contractInfo = {
       name: name,
       address: contractAddress,
+      contract: contract,
     };
 
     return { contract: contractInfo, params };
@@ -58,7 +51,13 @@ export async function deployAndVerify(
     const { run } = hre;
     const { contract, params } = await run("deploy", args);
 
-    console.log("\nVerifying", contract.name.toLowerCase(), "contract...");
+    console.log("Waiting for block confirmations...");
+
+    await contract?.contract?.deploymentTransaction()?.wait(5);
+
+    console.log("Confirmed!\n");
+
+    console.log("Verifying", contract.name.toLowerCase(), "contract...");
 
     await hre.run("verify:verify", {
       address: contract.address,
@@ -70,12 +69,11 @@ export async function deployAndVerify(
   }
 }
 
-export async function processParameters(
+export async function getParams(
   hre: HardhatRuntimeEnvironment,
   args: DeployArgument<Params>,
 ) {
   const values = Object.values(args.params);
-  if (!args.process) return values;
 
   // Custom function if you want to process parameters
   // Before deploying contract
