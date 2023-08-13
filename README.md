@@ -9,6 +9,6 @@ yarn hardhat help
 yarn hardhat test
 yarn hardhat node
 yarn hardhat accounts
-yarn hardhat deploy [--name] [--params] [--process] [--skip] [--network]
-yarn hardhat deploy-and-verify [--name] [--params] [--process] [--skip] [--network]
+yarn hardhat deploy [--name] [--params] [--network]
+yarn hardhat deploy-and-verify [--name] [--params] [--network]
 ```
