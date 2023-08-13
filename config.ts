@@ -5,14 +5,20 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 class Config {
-  public ACCOUNTS = this.getAccounts();
-  public SEPOLIA = process.env.SEPOLIA ?? "";
-  public ETHERSCAN_KEY = process.env.ETHERSCAN_API_KEY ?? "";
+  public ACCOUNTS: string[];
+  public SEPOLIA: string;
+  public ETHERSCAN_KEY: string;
+
+  constructor() {
+    this.ACCOUNTS = this.getAccounts();
+    this.SEPOLIA = process.env.SEPOLIA ?? "";
+    this.ETHERSCAN_KEY = process.env.ETHERSCAN_API_KEY ?? "";
+  }
 
   private getAccounts(): string[] {
     const accounts: string[] = [];
     const deployerKey = process.env.DEPLOYER_PRIVATE_KEY;
-    
+
     if (deployerKey) {
       accounts.push(deployerKey);
     }
