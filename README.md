@@ -12,7 +12,7 @@ yarn hardhat node
 
 ## Scripts
 
-1. List available network
+1. List available accounts
     `yarn hardhat accounts [--network]`
 
 demo: 
