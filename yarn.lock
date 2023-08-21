@@ -3623,6 +3623,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hardhat-template@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "hardhat-template@workspace:."
+  dependencies:
+    "@nomicfoundation/hardhat-chai-matchers": ^2.0.0
+    "@nomicfoundation/hardhat-ethers": ^3.0.0
+    "@nomicfoundation/hardhat-network-helpers": ^1.0.0
+    "@nomicfoundation/hardhat-toolbox": ^3.0.0
+    "@nomicfoundation/hardhat-verify": ^1.0.0
+    "@typechain/ethers-v6": ^0.4.0
+    "@typechain/hardhat": ^8.0.0
+    "@types/chai": ^4.2.0
+    "@types/mocha": ">=9.1.0"
+    "@types/node": ">=16.0.0"
+    chai: ^4.2.0
+    dotenv: ^16.3.1
+    ethers: ^6.4.0
+    hardhat: ^2.14.0
+    hardhat-gas-reporter: ^1.0.8
+    mocha: ^10.2.0
+    prettier: ^3.0.1
+    solidity-coverage: ^0.8.0
+    ts-node: ">=8.0.0"
+    typechain: ^8.1.0
+    typescript: ">=4.5.0"
+  languageName: unknown
+  linkType: soft
+
 "hardhat@npm:^2.14.0":
   version: 2.17.1
   resolution: "hardhat@npm:2.17.1"
@@ -6591,34 +6619,6 @@ __metadata:
   checksum: f23832fceeba7578bf31907aac744ae21e74a66f4a17a9e94507acf460e48f6db598c7023882db33bab75b80e027c21f276d405e4a0322d58f51c7088d428268
   languageName: node
   linkType: hard
-
-"template@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "template@workspace:."
-  dependencies:
-    "@nomicfoundation/hardhat-chai-matchers": ^2.0.0
-    "@nomicfoundation/hardhat-ethers": ^3.0.0
-    "@nomicfoundation/hardhat-network-helpers": ^1.0.0
-    "@nomicfoundation/hardhat-toolbox": ^3.0.0
-    "@nomicfoundation/hardhat-verify": ^1.0.0
-    "@typechain/ethers-v6": ^0.4.0
-    "@typechain/hardhat": ^8.0.0
-    "@types/chai": ^4.2.0
-    "@types/mocha": ">=9.1.0"
-    "@types/node": ">=16.0.0"
-    chai: ^4.2.0
-    dotenv: ^16.3.1
-    ethers: ^6.4.0
-    hardhat: ^2.14.0
-    hardhat-gas-reporter: ^1.0.8
-    mocha: ^10.2.0
-    prettier: ^3.0.1
-    solidity-coverage: ^0.8.0
-    ts-node: ">=8.0.0"
-    typechain: ^8.1.0
-    typescript: ">=4.5.0"
-  languageName: unknown
-  linkType: soft
 
 "then-request@npm:^6.0.0":
   version: 6.0.2

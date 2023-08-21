@@ -16,7 +16,7 @@ export async function deploy(
     const [deployer] = await ethers.getSigners();
 
     console.log("\nNetwork:", network.name);
-    console.log("Deployer addr:", deployer.address);
+    console.log("Deployer:", deployer.address);
     console.log("Params:", params);
 
     const factory = await ethers.getContractFactory(name, deployer);

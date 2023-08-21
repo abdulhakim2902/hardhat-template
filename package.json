@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "hardhat-template",
   "packageManager": "yarn@3.6.1",
   "scripts": {
     "format": "prettier --config .prettierrc '.' --write"

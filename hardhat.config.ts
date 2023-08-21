@@ -14,6 +14,7 @@ const config: HardhatUserConfig = {
       url: Config.SEPOLIA,
       accounts: Config.ACCOUNTS,
     },
+    /* Add more network */
   },
   etherscan: {
     apiKey: Config.ETHERSCAN_KEY,
