@@ -1,5 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { DeployArgument, Params } from "./types";
+import { DeployArgument, Params } from "../interfaces";
+import { getParams } from "../helpers";
 
 export async function deploy(
   args: DeployArgument<Params>,
@@ -67,18 +68,4 @@ export async function deployAndVerify(
   } catch (err) {
     console.log(err);
   }
-}
-
-export async function getParams(
-  hre: HardhatRuntimeEnvironment,
-  args: DeployArgument<Params>,
-): Promise<string[]> {
-  const params = args.params;
-
-  /*
-    Custom function for processing the parameters 
-    before deploying contract
-  */
-
-  return Object.values(params);
 }
