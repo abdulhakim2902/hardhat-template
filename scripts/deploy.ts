@@ -72,11 +72,13 @@ export async function deployAndVerify(
 export async function getParams(
   hre: HardhatRuntimeEnvironment,
   args: DeployArgument<Params>,
-) {
-  const values = Object.values(args.params);
+): Promise<string[]> {
+  const params = args.params;
 
-  // Custom function if you want to process parameters
-  // Before deploying contract
+  /*
+    Custom function for processing the parameters 
+    before deploying contract
+  */
 
-  return values;
+  return Object.values(params);
 }

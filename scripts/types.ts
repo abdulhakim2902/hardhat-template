@@ -5,10 +5,10 @@ export interface Contract {
 
 export interface DeployArgument<T> {
   name: string;
-  skip: boolean;
-  process: boolean;
   params: T;
 }
 
 // Params lists
-export interface Params {}
+export interface Params {
+  [any: string]: any;
+}
