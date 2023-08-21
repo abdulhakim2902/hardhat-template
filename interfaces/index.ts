@@ -1,11 +1,11 @@
 export interface Contract {
-  signer: string;
+  signer?: string;
   contract: string;
 }
 
-export interface DeployArgument<T> {
+export interface DeployArgument {
   name: string;
-  params: T;
+  params: Params;
 }
 
 // Params lists

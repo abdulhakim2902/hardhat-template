@@ -1,15 +1,18 @@
 import { task, types } from "hardhat/config";
-import { accounts } from "../scripts/accounts";
-import { deploy, deployAndVerify } from "../scripts/deploy";
+import { accounts } from "./accounts";
+import { deploy, deployAndVerify } from "./deploy";
+
+const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
+const PARAMS = { unlockTime: (Date.now() + ONE_DAY).toString() };
 
 task("accounts", "Get list of avalaible accounts").setAction(accounts);
 
-task("deploy", "Deploy contract")
-  .addOptionalParam("name", "Contract name", "", types.string)
-  .addOptionalParam("params", "Contract parameters", {}, types.json)
+task("deploy", "Deploys a contract")
+  .addOptionalParam("name", "Contract name", "Lock", types.string)
+  .addOptionalParam("params", "Contract parameters", PARAMS, types.json)
   .setAction(deploy);
 
-task("deploy-and-verify", "Deploy and verify contract")
-  .addOptionalParam("name", "Contract name", "", types.string)
-  .addOptionalParam("params", "Contract parameters", {}, types.json)
+task("deploy-and-verify", "Deploys and verifies a contract")
+  .addOptionalParam("name", "Contract name", "Lock", types.string)
+  .addOptionalParam("params", "Contract parameters", PARAMS, types.json)
   .setAction(deployAndVerify);

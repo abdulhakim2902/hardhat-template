@@ -1,71 +1,27 @@
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { DeployArgument, Params } from "../interfaces";
-import { getParams } from "../helpers";
+import { ethers } from "hardhat";
 
-export async function deploy(
-  args: DeployArgument<Params>,
-  hre: HardhatRuntimeEnvironment,
-) {
-  const { run, ethers, network } = hre;
-  const { name } = args;
+async function main() {
+  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
+  const unlockTime = currentTimestampInSeconds + 60;
 
-  try {
-    await run("compile");
+  const lockedAmount = ethers.parseEther("0.001");
 
-    const params = await getParams(hre, args);
+  const lock = await ethers.deployContract("Lock", [unlockTime], {
+    value: lockedAmount,
+  });
 
-    const [deployer] = await ethers.getSigners();
+  await lock.waitForDeployment();
 
-    console.log("\nNetwork:", network.name);
-    console.log("Deployer:", deployer.address);
-    console.log("Params:", params);
-
-    const factory = await ethers.getContractFactory(name, deployer);
-
-    console.log("\nDeploying", name.toLowerCase(), "contract...");
-
-    const contract = await factory.deploy(...params);
-
-    await contract.waitForDeployment();
-
-    const contractAddress = await contract.getAddress();
-
-    console.log("Contract is deployed at", contractAddress);
-
-    const contractInfo = {
-      name: name,
-      address: contractAddress,
-      contract: contract,
-    };
-
-    return { contract: contractInfo, params };
-  } catch (err) {
-    console.log(err);
-  }
+  console.log(
+    `Lock with ${ethers.formatEther(
+      lockedAmount,
+    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`,
+  );
 }
 
-export async function deployAndVerify(
-  args: DeployArgument<Params>,
-  hre: HardhatRuntimeEnvironment,
-) {
-  try {
-    const { run } = hre;
-    const { contract, params } = await run("deploy", args);
-
-    console.log("Waiting for block confirmations...");
-
-    await contract?.contract?.deploymentTransaction()?.wait(5);
-
-    console.log("Confirmed!\n");
-
-    console.log("Verifying", contract.name.toLowerCase(), "contract...");
-
-    await hre.run("verify:verify", {
-      address: contract.address,
-      contract: `contracts/${contract.name}.sol:${contract.name}`,
-      constructorArguments: params,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
